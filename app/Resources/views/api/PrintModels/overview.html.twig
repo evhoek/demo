@@ -1,0 +1,87 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Owner</th>
+            <th>Filename</th>
+            <th>Filesize (KiB)</th>
+            <th>Description</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for item in print_models %}
+        <tr onclick="">
+            <td>{{ item.getLoginUser().getUsername() }}</td>
+            <td><a class="fa fa-download" title="download" href="/api/PrintModels/Download/{{ item.getId() }}"> {{ item.getFilename() }}</a></td>
+            <td>{{ (item.getFilesize() / 1024)|number_format(0) }}</td>
+            <td>
+                <span>{{ item.getDescription() }}</span>
+                {% if item.getLoginUser().getUsername() == loginUsername %}
+                    <input style="display: none" value="{{ item.getDescription() }}"/>
+                    <i class="fa fa-floppy-o save" style="cursor: pointer; display: none" title="save" onclick="
+                        var el = $(this);
+                        var inputE = el.parent().find('input');
+                        
+                        // hide this button
+                        el.css('display', 'none');
+                        
+                        $.post('/api/PrintModels/Edit/{{ item.getId() }}', {description: inputE.val()}).always(function(data)
+                        {
+                            // response ok?
+                            if (data.result)
+                            {
+                                // hide input
+                                inputE.css('display', 'none');
+                                
+                                // copy new value and show span
+                                el.parent().find('span').html(inputE.val()).css('display', 'inline');
+                                
+                                // show edit button
+                                el.parent().find('i.edit').css('display', 'inline');
+                            }
+                            else
+                            {
+                                // show this button
+                                el.css('display', 'inline');
+                                
+                                alert('Unable to save!');
+                            }
+                        });
+                    "></i>
+                    <i class="fa fa-pencil-square-o edit" style="cursor: pointer" title="edit" onclick="
+                        $(this).css('display', 'none');
+                        $(this).parent().find('span').css('display', 'none');
+                        $(this).parent().find('input').css('display', 'inline').focus();
+                        $(this).parent().find('i.save').css('display', 'inline');
+                    "></i>
+                {% endif %}
+            </td>
+            <td class="text-right">
+                {% if item.getLoginUser().getUsername() == loginUsername %}
+                    <i class="fa fa-times" style="cursor: pointer" title="remove" onclick="
+                        var el = $(this);
+                        
+                        // hide this button
+                        el.css('display', 'none');
+                        
+                        $.getJSON('/api/PrintModels/Delete/{{ item.getId() }}').always(function(data)
+                        {
+                            // response ok?
+                            if (data.result)
+                                el.parents('tr').remove();
+                            else
+                            {
+                                // show this button
+                                el.css('display', 'inline');
+                                alert('Unable to delete!');
+                            }
+                        });
+                    "></i>
+                {% else %}
+                    &nbsp;
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
