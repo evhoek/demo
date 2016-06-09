@@ -10,6 +10,13 @@ use Symfony\Component\HttpFoundation\Response;
 class EditController extends Controller
 {
     /**
+     * update existing PrintModel
+     * 
+     * @param integer $id
+     * @param Request $request[] post data
+     * @param {string} Request[].description
+     * @return JSON result:false on error, on success result:true
+     * 
      * @Route("/api/PrintModels/Edit/{id}")
      */
     public function indexAction(Request $request, $id)

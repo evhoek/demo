@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 class OverviewController extends Controller
 {
     /**
+     * get all PrintModels
+     * 
+     * @return HTML html-table with all PrintModels, own printmodels are editable
+     * 
      * @Route("/api/PrintModels/Overview")
      */
     public function indexAction(Request $request)

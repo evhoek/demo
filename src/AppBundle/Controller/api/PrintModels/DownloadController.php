@@ -11,6 +11,11 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class DownloadController extends Controller
 {
     /**
+     * Download PrintModel file
+     * 
+     * @param integer $id
+     * @return * Binary data
+     * 
      * @Route("/api/PrintModels/Download/{id}")
      */
     public function indexAction(Request $request, $id)
