@@ -10,8 +10,15 @@ use Symfony\Component\HttpFoundation\Response;
 class AddController extends Controller
 {
     /**
-    * @Route("/api/PrintModels/Add")
-    */
+     * Add new PrintModel
+     * 
+     * @param Request $request[] post data
+     * @param {string} Request[].file The file.
+     * @param {string} Request[].description
+     * @return JSON result:false on error, on success result:true
+     * 
+     * @Route("/api/PrintModels/Add")
+     */
     public function indexAction(Request $request)
     {
         $loginUser = $this->get('security.context')->getToken()->getUser();

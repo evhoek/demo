@@ -10,6 +10,11 @@ use Symfony\Component\HttpFoundation\Response;
 class DeleteController extends Controller
 {
     /**
+     * Delete existing PrintModel
+     * 
+     * @param integer $id
+     * @return JSON result:false on error, on success result:true
+     * 
      * @Route("/api/PrintModels/Delete/{id}")
      */
     public function indexAction(Request $request, $id)
