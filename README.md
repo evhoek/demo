@@ -1,4 +1,6 @@
-demo
+file-upload demo
 ====
 
-A Symfony project created on June 2, 2016, 1:48 pm.
+Simple file-upload demo, build in Symfony2.
+Tool includes an API.
+Please check /docs folder for project documentation.
