@@ -1,6 +1,5 @@
 file-upload demo
 ====
 
-Simple file-upload demo, build in Symfony2.
-Tool includes an API.
-Please check /docs folder for project documentation.
+Simple file-upload demo (including API), build in Symfony2.
+Please check /doc folder for project documentation.
